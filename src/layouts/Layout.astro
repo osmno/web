@@ -27,7 +27,6 @@ const { frontmatter } = Astro.props;
         {
           sortedPages.map((page) => (
             <a href={page.url + "/"}>
-              {page.url}
               <div>{page.frontmatter.title}</div>
             </a>
           ))
