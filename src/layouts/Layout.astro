@@ -1,0 +1,50 @@
+---
+import Header from "../components/Header.astro";
+import { Image } from "astro:assets";
+import tieroneImage from "../images/tierone.png";
+
+const pages = Object.values(
+  import.meta.glob("../pages/*.md", { eager: true }),
+) as Array<{
+  frontmatter: { title: string; sort?: number; slug?: string };
+  url: string;
+}>;
+
+const sortedPages = pages.sort(
+  (a, b) => (a.frontmatter.sort || 0) - (b.frontmatter.sort || 0),
+);
+
+const { frontmatter } = Astro.props;
+---
+
+<html lang="nb-no">
+  <head>
+    <meta charset="utf-8" />
+    <title>OSM Norge – {frontmatter.title}</title>
+  </head>
+
+  <body>
+    <header>
+      <h1>OpenStreetMap Norge</h1>
+
+      <nav>
+        {
+          sortedPages.map((page) => (
+            <a href={page.url || "/"}>
+              <div>{page.frontmatter.title}</div>
+            </a>
+          ))
+        }
+      </nav>
+    </header>
+
+    <main>
+      <article>
+        <header>
+          <h2>{frontmatter?.title || "Side uten tittel"}</h2>
+        </header>
+        <slot />
+      </article>
+    </main>
+  </body>
+</html>
