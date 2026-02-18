@@ -1,8 +1,4 @@
 ---
-import Header from "../components/Header.astro";
-import { Image } from "astro:assets";
-import tieroneImage from "../images/tierone.png";
-
 const pages = Object.values(
   import.meta.glob("../pages/*.md", { eager: true }),
 ) as Array<{
@@ -15,6 +11,8 @@ const sortedPages = pages.sort(
 );
 
 const { frontmatter } = Astro.props;
+
+const baseUrl = import.meta.env.BASE_URL;
 ---
 
 <html lang="nb-no">
@@ -30,7 +28,8 @@ const { frontmatter } = Astro.props;
       <nav>
         {
           sortedPages.map((page) => (
-            <a href={page.url || "/"}>
+            <a href={page.url + "/"}>
+              {page.url}
               <div>{page.frontmatter.title}</div>
             </a>
           ))
