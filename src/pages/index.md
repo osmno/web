@@ -1,5 +1,5 @@
 ---
-layout: ../layouts/Layout.astro
+layout: /src/layouts/Layout.astro
 title: Velkommen
 sort: 1
 ---
