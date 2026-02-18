@@ -2,7 +2,7 @@
 const pages = Object.values(
   import.meta.glob("../pages/*.md", { eager: true }),
 ) as Array<{
-  frontmatter: { title: string; sort?: number; slug?: string };
+  frontmatter: { title: string; sort?: number };
   url: string;
 }>;
 
